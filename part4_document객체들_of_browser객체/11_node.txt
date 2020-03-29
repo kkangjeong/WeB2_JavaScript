@@ -1,0 +1,16 @@
+# 객체의 종류(이걸 다 포함하는 큰 범위가 document객체*(document객체의 부모가 node)// 각 노드는 객체를 갖는다//노드 : 객체화할 때 개체의 형식)
+1) DocumentType 노드: <!DOCTYPE 어쩌구> : 객체화할 때 개체의 형식//만들어진 객체를 : DOM(Document Object Model): html문서의 프로그래밍 인터페이스
+2) element(태그로 되어있는)노드* - attribute 노드* (태그안의 속성)
+                          entity 노드(&lt;어쩌구&gt; // <어쩌구>출력되는데 태그랑 혼동하니 이렇게 쓰는)
+                          entityReference 노드(위에서 &이랑 ;)
+                          text 노드*(당연히 쓰고자하는 텍스트)
+3) comment 노드
+4) CDATASection(<>이것처럼 특수기호 쓸 때 이것쓰면 마음껏 쓸 수 있다)노드 :  <!CDATA[<,>,]>
+5) Notation 노드(속성의 값 중 표현 형식 : 10px, #ffff00같은)
+
+이것들이 문서에서 읽혀지면 객체화 된다//5개는 객체화 되기위한 타입들인 것
+
+
+
+
+# element 객체 속성 사용하기 -> html 태그의 속성과 객체의 속성은 거의 일치한다!

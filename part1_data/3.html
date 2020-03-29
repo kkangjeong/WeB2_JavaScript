@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <script>
+
+            // json이라는 데이터를 파싱하는 방법 2가지
+            // 파일로 객체가 넘겨오면 스트링으로 오는데 console.log(data[0].id) 할 수 있는(데이터 배열로 사용할 수 있는) 방법 2가지
+            // 1) eval() 함수 : 문자열을 실행가능하도록 하는 함수
+
+            // +) eval() 함수 예제
+            eval('var x = 30;');
+
+            console.log(x);     //문자열인데 x가 출력이 된다 wow
+
+            // 적용해보면
+
+            var data = '[ \
+                            {"id":1, "title": "hello json"}, \
+                            {"id":2, "title": "hi json"}, \
+                            {"id":3, "title": "json is"} \
+                        ]' ;
+                                        // 자바스크립트에서는 문자 내려쓰기가 안되서 하나의 문자열로 묶기 위해 -> 한 칸 뛰고 역슬래시
+
+            eval("var ar = " + data + ";");
+
+            console.log(ar[0].id);      // json이라는 데이터를 파싱할 수 있다
+
+
+
+
+
+            // 2) json 파서를 이용한 파싱(이것을 하기 위해서는 키값 쌍따옴표 해야)
+            var data = JSON.parse('{"id":1, "title":"aaa"}');
+
+            console.log(data.title);
+            // +) id에 ""안붙여도 스트링으로 인식한다 -> 반드시 써야하는 경우 : 띄어쓰기 있는 키 이름일 때(밑에 예시 참고)
+
+            /*
+
+            var data = {"n id":1, title:"aaa"};     //n id 일 때
+
+            console.log(data["n id"]);       // 출력하기 위해서는 이렇게
+
+            */
+
+
+
+            // 쌍따옴표 해주는 함수 이용하는 예시
+            var data2 = {id:1, title:"aaa"};
+
+            var json = JSON.stringify(data2);
+            alert(json);
+
+
+
+        </script>
+    </body>
+</html>

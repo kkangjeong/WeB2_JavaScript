@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<!--
+    # 하위 element 선택하기 : 3개에다가 각각 id 귀찮게 부여하지 말고 한번에 효과적으로 하자 (바로 밑)
+    <section>
+        <h1></h1>
+        <ul>
+            <li id = "num1">번호1</li>
+            <li id = "num2">번호2</li>
+            <li id = "num3">번호3</li>
+        </ul>
+    </section>
+-->
+    <!-- 노드 찾는 방법 getElementById 이외에도 getElementsByTagName(태그네임 여러개 나올 수 있어서 s붙인거고 배열로 나온다) 이랑
+    getElementsByClassName(클래스네임 여러개 나올 수 있어서 s붙인거고 배열로 나온다) 이 있다 -->
+
+    <section id = "sec1">
+        <ul>
+            <li>번호1</li>
+            <li>번호2</li>
+            <li>번호3</li>
+        </ul>
+    </section>
+
+<!-- 사용하기
+    var list = sec1.getElementsByTagName("li");
+    list[0].textContent = "Hello";      //.textContent 랑(더 선호) .innerText 랑 같다
+
+-->
+
+</body>
+</html>
+
+

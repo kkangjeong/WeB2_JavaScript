@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+    <script>
+        //자바스크립트에서는 함수안에 함수 정의 가능
+        function f1() {
+            var a = 1;
+            f2();
+            function f2() {
+                var a = 2;
+                f3();
+                function f3() {
+                    var a = 3;
+                    //var안쓰면 사용할 수 있는 a는 f2의 a, f1의 a, 전역객체의 a 세 개이다
+                }
+            }
+        }
+        f1();
+        alert(a);
+
+
+
+        // 자바스크립트에서는 (함수를 정의하지 않고) 함수를 객체로 만들어서 그 자체가 정의인데
+        // 함수를 객체로 만들기 때문에 그 객체가 반환되거나
+        // 함수가 함수 안에서 만들어질 수 있고
+        // 함수의 지역변수 문제 때문에 '클로저'가 발생!
+
+        function f1() {
+            var a = 1;
+
+            return function f2() {
+                return a;
+
+                // function f2() {
+                //     return a;    //이게 '클로저'(:닫을 수 있도록 하는 열쇠니까)
+                //}
+            }
+        }
+        var f = f1();   //f가 함수 (객체)인 것
+        var a = f();    //f2함수 내에 있는 a가 부모꺼인데 사용가능
+        alert(a);
+
+        //f1 함수는 함수 호출 후(43줄) 클로즈 해야하는데 a 변수를 계속 사용해서 천상 코드 처음부터 끝까지 열려있다
+
+    </script>
+</body>
+</html>
+
+

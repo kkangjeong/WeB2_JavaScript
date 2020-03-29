@@ -1,0 +1,67 @@
+<!--
+# 데이터 객체와 래퍼 클래스 : 자바스크립트는 모든 데이터가 객체로 되어있다
+
+var x = 3.7
+3이든 3.7이든 'A'이든 "Hello"이든 var로 통일
+대입이 아니라 참조이다
+자바스크립트에서 x는 x의 공간을 만들지 않고
+x는 값 할당될 때 auto boxing(boxing/wrapping : 스스로 공간을 갖게된다)하는 참조변수
+
+
+# wrapper class : (자료형이 아니라)bool, number, string 이 있다
+
+
+var x;  만 하면 undefined 상태이다(= (다른 언어에서의) 널 포인터)
+
+1)
+var x;
+alert(x == "undefined");
+
+false 나온다 -> undefined가 문자열이 아니라 하나의 값이라서
+
+2)
+var x;
+alert(x == undefined);
+
+true 나온다
+
+
+
+# 배열 생성하기
+
+<script>
+    var nums = new Array();
+
+    nums[3] = 57;
+
+    console.log(nums);
+
+    # 앞에 세 인덱스는 비어있고 네번째 인덱스에 57 추가되어있다
+</script>
+
+
+
+# 배열 초기화
+var nums = new Array();
+var nums = new Array(5);    # 5개 인덱스 개수를 가진 배열 생성
+var nums = new Array(5, 10, 21);    # 3개 인덱스값 초기화
+var nums = new Array(5, 10, 21, "hello");   # 자바스크립트에서는 다른 데이터 함꼐 가능
+
+var nums = new Array(5, 10, 21, "hello",new Array(2, 3, 4));
+alert(nums[4][1]);
+
+
+
+# splice() 메소드 예시 : 삭제, 대체, 추가 기능
+
+var nums = new Array(10, 21, "hello");
+
+nums.splice(1);     # 1번째 이후 쭈욱 삭제
+
+nums.splice(1, 1);      # 1번째 이후 하나만 삭제
+
+nums.splice(2, 1, "hoho");      # 2번째 이후 하나만 삭제 후 스트링 hoho로 대체
+
+nums.splice(2, 0, "hoho");      # 0이라면 리스트 추가 -> [10, 21, "hoho","hello"]
+
+ -->

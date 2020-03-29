@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+        <!-- onclick 이벤트일 때 코드가 길어진다면 방법-->
+
+        function printResult(){
+            var x = prompt("x 값을 입력하세요");
+            var y = prompt("y 값을 입력하세요");
+
+            x = parseInt(x);
+            y = parseInt(y);
+
+            alert(x+y);
+        }
+    </script>
+</head>
+<body>
+    <input type = "button" value = "출력" onclick="printResult();" />
+
+</body>

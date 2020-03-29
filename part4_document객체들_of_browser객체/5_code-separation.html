@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- html코드랑 script코드랑 분리 작업한다면!! -> .js 파일 이용 -->
+    <!-- <script> 밑 부터 쭉 코드를 .js 파일에 넣기 (5_code-separation1.js 에)-->
+    <script src = "5_code-separation1.js"></script>      <!-- 스크립트 태그는 단일 태그 불가( <script src = "5_code-separation1.js" /> 안됨) -->
+    <script src = "5_code-separation2.js"></script>     <!-- 파일 추가  -->
+    <!--  두 개 동시에 실행되면 funtion함수가 겹쳐서 처음 것 잊혀지고 두번째 것만 실행 -> 이벤트 누적시키기 -->
+    <!--  어떻게? window.load 말고 window.addEventListener 로  -->
+</head>
+<body>
+    <input type = "button" value = "출력" id="btnPrint"/><br />
+    <span id ="span1" onclick="alert('hello');">스팬입니다.</span>
+</body>
+</html>

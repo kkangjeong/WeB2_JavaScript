@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+        // html 파일 (로드->) 메모리 (보여주기->) 사용자 인터페이스
+        // 메모리 상에 올라가는 태그 : element 객체 -> 사용자 인터페이스에 내가 원하는 것으로 변화를 주는
+        function printResult(){
+            var x = prompt("x 값을 입력하세요", 0);
+            var y = prompt("y 값을 입력하세요", 0);
+
+            btnPrint.value = x + y;
+            span1.innerText = x + y;    //input의 value 처럼 속성이 아니니까 innerText 사용해야
+            //btnPrint.type = "text";     // 이 코드만 있으면 온클릭하면 텍스트로 바뀐다
+        }
+    </script>
+</head>
+<body>
+    <input type = "button" value = "출력" onclick="printResult();" id="btnPrint"/><br />
+    <span id ="span1" onclick="alert('hello');">스팬입니다.</span>
+</body>
+
+
+
+<!--
+    <script>
+        function printResult(){
+            var x = prompt("x 값을 입력하세요", 0);
+            var y = prompt("y 값을 입력하세요", 0);
+
+            btnPrint.value = x + y;
+        }
+    </script>
+</head>
+<body>
+    <input type = "button" value = "출력" onclick="printResult();" id="btnPrint"/>
+</body>
+
+
+위에거를 이렇게 해보면
+    <script>
+        function printResult(){
+            var x = prompt("x 값을 입력하세요", 0);
+            var y = prompt("y 값을 입력하세요", 0);
+
+            btnPrint.value = x + y;
+        }
+        btnPrint.onclick = printResult;  // printResult()가 아니다 -> 이건 함수호출이니까
+    </script>
+</head>
+<body>
+    <input type = "button" value = "출력" id="btnPrint"/>
+</body>
+
+but, 오류 뜬다 -> script부터 코드 쭉 읽어가는데 함수 호출안했으니 건너뛰고 btnPrint.onclick의 btnPrint가 메모리 상에 아직 없어서
+-> 1) <script> 쭉을 <body>에 <input>뒤에 넣으면 오류 안뜬다
+
+
+2) 두번째 방법 : 윈도우의 load 이벤트 사용하기
+    <script>
+        function printResult(){
+            //밑에 개념 때문에 자바스크립트에서는 대문자로//html에서는 대시로
+            var btnPrint = document.getElementById("btn-print");    //html, javascript 서로 쓰는 명칭 달라서 이렇게 바꿔주는 것
+
+            var x = prompt("x 값을 입력하세요", 0);
+            var y = prompt("y 값을 입력하세요", 0);
+
+            btnPrint.value = x + y;
+        }
+        function init(){        //윈도우가 완료(로드)될 때! 실행하도록
+            //밑에 개념 때문에 자바스크립트에서는 대문자로//html에서는 대시로
+            var btnPrint = document.getElementById("btn-print");
+
+            btnPrint.onclick = printResult;
+        }
+        window.onload = init;
+    </script>
+</head>
+<body>
+    <input type = "button" value = "출력" id="btn-print"/>
+</body>
+
+
+
++) 객체 아이디(위에서는 75줄 btnPrint) 명명 방법
+    html에서는 대문자x //  - (dash) 써서 btn-print
+    javascript에서는 대문자o // btnPrint
+
+ -> 두 함수에서 (var btnPrint = document.getElementById("btn-print");) 공통으로 쓰니까 한번만 써서 쓰는 방법 : 함수를 직접 대입하자
+ -> 함수 내에서 이벤트 함수들이 실행되는 것
+    이 구조 외우기**
+    but, html코드랑 script코드랑 분리 작업한다면!! -> 5_code-separation.html 로
+
+    <script>
+        window.onload = function(){
+            var btnPrint = document.getElementById("btn-print");
+
+            //함수를 가져다붙이고 함수명도 그럼 필요없으니 함수명 지우기
+            btnPrint.onclick = function(){
+                //var btnPrint = document.getElementById("btn-print");      // 위에서 한번 실행되니까 이 코드는 중복되니까 지우기
+
+                var x = prompt("x 값을 입력하세요", 0);
+                var y = prompt("y 값을 입력하세요", 0);
+
+                btnPrint.value = x + y;
+            };
+        }
+    </script>
+</head>
+<body>
+    <input type = "button" value = "출력" id="btn-print"/>
+</body>
+
+-->

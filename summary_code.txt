@@ -1,0 +1,632 @@
++) <input> 태그 일 때는      id이름.value
+    그 외에는                     .textContent
+
+html 파일 : 웹 뜨면 바로 나오는 내용들  // 대쉬
+js 파일 : onclick 하면 나오는 것들 // 대문자만
+
+
+
+1. getElementById , getelementsByClassName  <  querySelectorAll  , querySelector
+
+1) id 일때  getElementById
+ 
+html 파일에는
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src = "5_code-separation2.js"></script>  
+</head>
+<body>
+    <input type = "button" value = "출력" id = "btn-print" />
+</body>
+</html>
+
+*거의 input 태그
+type = "text" 도 있고 "button"  "list"  "color"  ...
+
+
+
+
+
+js 파일에는
+
+window.addEventListener("load",function () {		//연결 파일 많으면 function 충돌하니까 window.load 말고
+
+    var btnPrint = document.getElementById("btn-print");
+
+    btnPrint.onclick = function(){
+
+        var x = prompt("x 값을 입력하세요", 0);
+        var y = prompt("y 값을 입력하세요", 0);
+
+        btnPrint.value = x + y;
+    };
+});
+
+
+
+
+2) class 일 때
+
+js 파일에는
+
+window.addEventListener("load",function () {
+    var section2 = document.getElementById("section2");     
+
+    var txtX = section2.getElementsByClassName("txt-x")[0];     
+    var txtY = section2.getElementsByClassName("txt-y")[0];
+    var btnAdd = section2.getElementsByClassName("btn-add")[0];
+    var txtSum = section2.getElementsByClassName("txt-sum")[0];
+
+    btnAdd.onclick = function(){
+        var x = parseInt(txtX.value);
+        var y = parseInt(txtY.value);
+
+        txtSum.value = x + y;
+    };
+});
+
+
+
+3) 1,2보다 헷갈리지 않는 querySelectorAll(여러개), querySelector(한개)
+
+html 파일에는
+
+<section id="section3">
+            //<input name="x" type="text" value="0" dir="rtl" />
+            
+            <input class="txt-x" type="text" value="0" dir="rtl" />
+            +
+            <input class="txt-y" type="text" value="0" dir="rtl" />
+            <input class="btn-add" type="button" value="=" />
+            <input class="txt-sum" type="text" value="0" readonly dir="rtl" />
+    </section>
+
+
+js 파일에는
+
+window.addEventListener("load",function () {
+    var section3 = document.getElementById("section3");  
+
+    var txtX = section3.querySelector(".txt-x");    
+    var txtY = section3.querySelector(".txt-y");     // 여기는 section3에 txt-x는 한개니까(css selector 구문을 ""안에 쓰기 //#인지 or .인지 그거)
+    var btnAdd = section3.querySelector(".btn-add");
+    var txtSum = section3.querySelector(".txt-sum");
+
+
+   //1) var txtX = section3.querySelectorAll("input");    //태그명으로도 검색할 수 있고//근데 input태그 많으니까 배열로 받을거니까 All로
+   //2) var txtX = section3.querySelector("input[name='x']");  //input중에서 속성이 name인 것 만 검색하기도 가능
+            
+
+    btnAdd.onclick = function(){
+        var x = parseInt(txtX.value);
+        var y = parseInt(txtY.value);
+
+        txtSum.value = x + y;
+    };
+});
+
+
+
+2. children : 자식노드 선택    //childNodes는 주석, 텍스트도 자식노드로 치니까 사용 x
+
+html 파일에는
+
+<section id="section4">
+    <div class="box">
+        <input />
+        <input />
+    </div>
+</section>
+
+
+
+js 파일에는
+
+window.addEventListener("load",function () {
+    var section4 = document.querySelector("#section4");
+
+    var box = section4.querySelector(".box");
+
+    var input1 = box.children[0];   
+    var input2 = box.children[1];
+
+    input1.value = "hello";
+    input2.value = "hi";
+
+});
+
+
+
+3. js에서 css 속성 바꾸기
+
+html 파일에는
+   <section id="section5">
+            <input class="src-input" list="img-list" />
+            <datalist id="img-list">
+                <option value="1.jpg">img1</option>
+                <option value="2.jpg">img2</option>
+                <option value="3.jpg">img3</option>
+            </datalist>
+
+            <!--  css 추가 내용 : 이거 누르면 이미지 테두리 색바뀌는   -->
+            <input type="color" class="color-input" />
+
+            <input class="change-button" type="button" value="변경하기"/>
+        <div>
+            <img class="img" src="12_images/1.jpg" style="border: 1px solid red;" />
+        </div>
+    </section>
+
+
+
+js 파일에는
+
+window.addEventListener("load",function () {
+    var section = document.querySelector("#section5");
+
+    var srcInput = section.querySelector(".src-input");
+    var imgSelect = section.querySelector(".img-select");
+    var changeButton = section.querySelector(".change-button");
+    var img = section.querySelector(".img");
+    var colorInput = section.querySelector(".color-input");
+
+
+    changeButton.onclick = function () {
+        img.src = "12_images/" + srcInput.value;     
+
+        img.style.borderColor =  colorInput.value;     // border의 color만 바꿀건데 border-color 명칭 대쉬 있어서 사용불가네 -> 이렇게
+
+        // 자바스크립트에서 css 속성(class) 바꿀 때에는 이렇게
+        //console.log(img.className);
+    };
+    //엘리먼트.스타일.속성 = "문자열이다아";
+    //txt1.style.width = 100; 이 아니라 txt1.style.width = 100px; 이다
+
+});
+
+
+
+
+4. 텍스트노드 추가 & 삭제
+
+1) 추가 - 1방법 : .append()     // 어렵  // 그치만 쓰인다
+html 파일에는
+  <section id="section7">
+        <div>
+            <input class="title-input" name="title" />
+            <input type="button" class="add-button" value="추가" />
+            <input type="button" class="del-button" value="삭제" />
+        </div>
+        <ul class="menu-list">
+            <li><a href="">aaa</a></li>
+            <li><a href="">bbb</a></li>
+        </ul>
+    </section>
+    <hr />
+
+js 파일에는
+var html = '<a href=\"\">' + title + '</a>';
+var li = document.createElement("li");
+li.innerHTML = html;
+menuListUl.append(li);
+
+
+1) 추가 -2방법 : .createTextNode() , .createElement() , .appendChild()  //겁나 복잡  // 그치만 쓰인다
+js 파일에는
+  var title = titleInput.value;
+        var txtNode = document.createTextNode(title);
+        var aNode = document.createElement("a");    //엘리먼트 노드 첫째꺼 추가
+        var liNode = document.createElement("li");    //엘리먼트 노드 두번째꺼 추가
+        aNode.href = "";
+
+        menuListUl.appendChild(liNode); //menu-list의 자식은 li태그이고 , li태그의 자식은 a태그이고, a태그의 자식은 텍스트이니까 고려해서 코드짜기
+        liNode.appendChild(aNode);
+        aNode.appendChild(txtNode);
+
+
+2) 삭제 - 1방법 : .removeChild()   /(아무거나 쓰기)
+    delButton.onclick = function () {
+        var liNode = menuListUl.children[0];    // : 엘리먼트노드 중에 첫번째    //var txtNode = menuListUl.childNodes[0];   : 모든 노드 중에 첫번재
+        menuListUl.removeChild(liNode);
+    };
+ 
+2) 삭제 - 2방법 : . remove()    // 1처럼 부모 얻어서 하는 게 아니라 내가 그냥 지워지겠다(아무거나 쓰기)
+    delButton.onclick = function () {
+        var liNode = menuListUl.children[0];
+        liNode.remove();
+ };
+
+
+
+5. 노드 복제 & 템플릿태그 이용해서 노드 복제
+1) 노드 복제(복제할 노드 있으면)
+
+html 파일에는
+
+<section id="section8">
+        <div>
+            <input type ="button" class="clone-button" value="복제" />
+            <input type ="button" class="template-button" value="템플릿 복제" />
+        </div>
+        <table border="1" class="notice-list">
+            <thead>
+                <tr>
+                    <td>번호</td>
+                    <td>제목</td>
+                    <td>작성일</td>
+                    <td>작성자</td>
+                    <td>조회수</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><a href="1">자바스크립트란..</a></td>
+                    <td>2020-03-11</td>
+                    <td>kkang</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><a href="3">기본기가 튼튼해야..</a></td>
+                    <td>2020-03-13</td>
+                    <td>kji</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><a href="4">조회수는..</a></td>
+                    <td>2020-03-14</td>
+                    <td>ji</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <hr />
+
+
+js 파일에는
+
+window.addEventListener("load",function () {
+    var notice = [
+        {id:5, title: "첫번째꺼", regDate:"2020-03-15", writerID:"jik", hit:0},
+        {id:6, title: "두번째꺼", regDate:"2020-03-16", writerID:"ji", hit:17}
+    ];
+    var section = document.querySelector("#section8");
+
+    var cloneButton =section.querySelector(".clone-button");
+    var templateButton =section.querySelector(".template-button");
+    var noticeList =section.querySelector(".notice-list");
+    var tbodyNode = noticeList.querySelector("tbody");
+
+    cloneButton.onclick = function () {
+        var trNode = noticeList.querySelector("tbody tr");
+        var cloneNode = trNode.cloneNode(true);     //노드 복제는 함수가 있다 -> e
+
+        var tds = cloneNode.querySelectorAll("td");
+        tds[0].textContent = notice[0].id;
+        tds[1].innerHTML = '<a href="'+notice[0].id+'">'+notice[0].title + '</a>';
+        tds[2].textContent = notice[0].regDate;
+        tds[3].textContent = notice[0].writerID;
+        tds[4].textContent = notice[0].hit;
+
+        tbodyNode.append(cloneNode);  
+    };
+});
+
+
+
+2) 템플릿태그 이용해서 노드 복제하기(복사할 노드 없으면)
+
+html 파일에는
+<section id="section8">
+        <div>
+            <input type ="button" class="clone-button" value="복제" />
+            <input type ="button" class="template-button" value="템플릿 복제" />
+        </div> 
+        <template>
+            <tr>
+                <td></td>
+                <td><a href="1"></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </template>
+
+        <table border="1" class="notice-list">
+            <thead>
+                <tr>
+                    <td>번호</td>
+                    <td>제목</td>
+                    <td>작성일</td>
+                    <td>작성자</td>
+                    <td>조회수</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </section>
+    <hr />
+
+js 파일에는
+
+templateButton.onclick = function () {
+        var template = section.querySelector("template");
+        var cloneNode = document.importNode(template.content, true);    //위랑 여기만 다르다
+
+        var tds = cloneNode.querySelectorAll("td");
+        tds[0].textContent = notice[0].id;
+        tds[1].innerHTML = '<a href="'+notice[0].id+'">'+notice[0].title + '</a>';
+
+        tds[2].textContent = notice[0].regDate;
+        tds[3].textContent = notice[0].writerID;
+        tds[4].textContent = notice[0].hit;
+
+        tbodyNode.append(cloneNode);
+    };
+
+
+
+6. 노드 순서바꾸기
+
+js 파일에는
+
+window.addEventListener("load", function(){
+    var section = document.querySelector("#section9");
+
+    var upButton = section.querySelector(".up-button");
+    var downButton = section.querySelector(".down-button");
+    var noticeList =section.querySelector(".notice-list");
+    var tbodyNode = noticeList.querySelector("tbody");
+
+    //고정된 노드
+    //var currentNode = tbodyNode.children[0];    //이거 맞는데 밑줄처럼 순회 이용해보기//엘리먼트 노드랑 텍스트노드, 주석 노드 모두 다 사용가능
+    var currentNode = tbodyNode.firstElementChild;     //엘리먼트만 대상으로 하는 노드만 필요하면 .parentElementNode 사용
+
+   downButton.onclick = function(){
+       var nextNode = currentNode.nextElementSibling;
+
+       if(nextNode == null){
+           alret("더 이상 이동할 수 없습니다!");
+           return;     
+       }
+
+       //없애고나서 맨 처음에 넣기
+       // 1)
+       //tbodyNode.removeChild(nextNode);    //화면상 nextNode 사라지긴 하지만 지역변수라서 currentNode랑 연결되고 있기 때문에(17줄) 지역변수 끝나기 전에만 사용할 수 있다
+       //tbodyNode.insertBefore(nextNode, currentNode);       //사용하자(append는 뒤로 insert는 앞으로)
+
+       // 2)
+       // 없애는 코드 없이도 insertBefore 만 하면 되긴하다
+       //tbodyNode.insertBefore(nextNode, currentNode);
+
+
+       // 3)
+       // .InsertAdjacentElement 쓰면 더 유동적으로 삽입가능 (4가지 : beforebegin, afterbegin, beforeend, afterend)
+       currentNode.insertAdjacentElement("beforebegin", nextNode);  //nextNode야 내(currentNode) 앞으로 와
+   };
+
+    upButton.onclick = function(){
+        var prevNode = currentNode.previousElementSibling;
+
+        if(prevNode == null){
+            alert("더 이상 이동할 수 없습니다!");
+            return;
+        }
+        // 1)
+        //tbodyNode.removeChild(currentNode);  없어도 되는 코드
+        tbodyNode.insertBefore(currentNode,prevNode);
+
+        // 2)
+        //currentNode.insertAdjacentElement("afterend", prevNode);
+    };
+});
+
+
+7. 다중 element노드 선택
+
+html 파일에는
+
+<section id="section10">
+        <div>
+            <input type="button" class="del-button" value="일괄 삭제" />
+            <input type="button" class="swap-button" value="선택된 노드 바꾸기" />
+        </div>
+        <table border="1" class="notice-list">
+            <thead>
+            <tr>
+                <td><input class="overall-checkbox" type="checkbox"></td>
+                <td>번호</td>
+                <td>제목</td>
+                <td>작성일</td>
+                <td>작성자</td>
+                <td>조회수</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>1</td>
+                <td><a href="1">자바스크립트란..</a></td>
+                <td>2020-03-10</td>
+                <td>kang</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>2</td>
+                <td><a href="1">유투브란..</a></td>
+                <td>2020-03-11</td>
+                <td>kkang</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>3</td>
+                <td><a href="3">기본기가 튼튼해야..</a></td>
+                <td>2020-03-12</td>
+                <td>kji</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>4</td>
+                <td><a href="4">조회수는..</a></td>
+                <td>2020-03-13</td>
+                <td>ji</td>
+                <td>0</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    <hr />
+
+js 파일에는
+window.addEventListener("load", function() {
+    var section = document.querySelector("#section10");
+
+    var noticeList = section.querySelector(".notice-list");
+    var tbody = noticeList.querySelector("tbody");
+    var allCheckbox = section.querySelector(".overall-checkbox");
+    var delButton = section.querySelector(".del-button");
+    var swapButton = section.querySelector(".swap-button");
+
+    allCheckbox.onchange = function () {
+        var inputs = tbody.querySelectorAll("input[type='checkbox']");
+
+        //value 값말고 checked 값 사용하는 거 헷갈리지 말기
+        for (var i = 0; i < inputs.length; i++)
+            inputs[i].checked = allCheckbox.checked;
+    };
+
+    delButton.onclick = function () {
+        var inputs = tbody.querySelectorAll("input[type='checkbox']:checked");
+
+        for(var i=0;i<inputs.length;i++)
+            inputs[i].parentElement.parentElement.remove();
+    };
+});
+
+
+
+8. 선택된 노드 순서바꾸기(insertBefore 로는 어려워서)  : 빈배열에다가 2개 놓고 replaceWith로 (기존꺼가 빠지는거라 2개 중 하나 복사해야 cloneNode)
+
+js 파일에는
+
+    swapButton.onclick = function () {
+        var inputs = tbody.querySelectorAll("input[type='checkbox']:checked");  //선택된 것만
+
+        if(inputs.length != 2) {
+            alert("2개를 선택해주세요");
+            return;
+        }
+        var trs =[];
+        for(var i =0;i<inputs.length;i++)
+            trs.push(inputs[i].parentElement.parentElement);
+
+        var cloneNode = trs[0].cloneNode(true);  //두개를 스위치하는 코드
+        trs[1].replaceWith(cloneNode);
+        trs[0].replaceWith(trs[1]);
+
+    };
+
+
+9. 
+
+html 파일에는
+ <section id="section11">
+        <template>
+            <tr>
+                <td></td>
+                <td><a href=""></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </template>
+        <table border="1" class="notice-list">
+            <thead>
+            <tr>
+                <td class="id">번호</td>
+                <td class="title">제목</td>
+                <td class="reg-date">작성일</td>
+                <td class="writer-id">작성자</td>
+                <td class="hit">조회수</td>
+            </tr>
+            </thead>
+            <tbody>
+ 	</tbody>
+        </table>
+    </section>
+    <hr />
+
+js 파일에는
+window.addEventListener("load", function(){
+
+    var notices = [
+        {"id":1, "title":"자바스크립트란..", "regDate":"2020-03-10", "writerId":"kang", "hit":2},
+        {"id":2, "title":"유투브란..", "regDate":"2020-03-11", "writerId":"kkang", "hit":1},
+        {"id":3, "title":"기본기가 튼튼해야..", "regDate":"2020-03-12", "writerId":"kji", "hit":3},
+        {"id":4, "title":"조회수는..", "regDate":"2020-03-13", "writerId":"ji", "hit":0}
+    ];
+
+    var section = document.querySelector("#section11");
+
+    var noticeList =section.querySelector(".notice-list");
+    var titldTd = section.querySelector(".title");
+    var tbodyNode = noticeList.querySelector("tbody");
+
+    var bindData = function(){
+        //저번꺼 복붙
+        var template = section.querySelector("template");
+
+        for(var i=0; i<notices.length; i++){
+            var cloneNode = document.importNode(template.content, true);
+            var tds = cloneNode.querySelectorAll("td");
+            tds[0].textContent = notices[i].id;
+
+            var aNode = tds[1].children[0];
+            aNode.href=notices[i].id;
+            aNode.textContent = notices[i].title;
+
+            tds[2].textContent = notices[i].regDate;
+            tds[3].textContent = notices[i].writerId;
+            tds[4].textContent = notices[i].hit;
+
+            tbodyNode.appendChild(cloneNode);
+        }
+    };
+
+    bindData();
+    
+    var titleSorted = false;    //내림차순도 하기 위해서
+
+    titldTd.onclick = function(){
+        tbodyNode.innerHTML = "";
+
+        //객체 형태의 배열이라서 기준열을 제공해야(-1인지 1인지 0인지)
+        //오름차순 정렬
+        if(!titleSorted)    //한번만 호출되도록
+            notices.sort(function (a, b) {
+                titleSorted = true;
+
+                if (a.title < b.title)
+                    return -1;
+                else if (a.title > b.title)
+                    return 1;
+                else
+                    return 0;
+            });
+        else
+            notices.reverse();  //내림차순 쉽게//정렬 한번이라도 된 적이 있으면
+
+        bindData();
+    };
+});

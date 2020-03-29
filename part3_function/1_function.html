@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>함수</title>
+    </head>
+    <body>
+        <script>
+            // 함수 3가지 방법 : 함수 정의 없고 객체니까 변수이름 붙이고
+            // 1)
+            //var add = new Function("x,y", "return x+y;");
+
+            // 2) 세미콜론 있어야(객체이고 값 대입해주는 문장이 끝난거니까('=' 있어서))
+            var add = function(x,y){
+
+                alert(arguments.length);    // arguments라는 collection이 있다-> 5출력
+                //alert(arguments[3]);      //출력도 가능하다
+                return x+y;
+            };
+
+            // 3) 세미콜론 없다(대입되는 것도 아니고 자체가 정의된 문장이니까)
+            //function add(x,y){
+            //    return x+y;
+            //}
+
+            //alert(add(3,4));
+            alert(add(3,4,5,6,"hello"));    //매개변수 개수가 많아도 오류안뜨고 7 출력된다
+
+        </script>
+    </body>
+</html>
+
+

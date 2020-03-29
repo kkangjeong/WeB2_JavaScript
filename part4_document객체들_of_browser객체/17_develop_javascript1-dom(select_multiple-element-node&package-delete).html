@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src = "17_develop_javascript1-dom(select_multiple-element-node&package-delete).js"></script>
+</head>
+<body>
+    <section id="section10">
+        <h1>Ex10) 다중 엘리먼트 노드선택 & 일괄삭제 & 노드의 자리바꾸기</h1>
+        <div>
+            <input type="button" class="del-button" value="일괄 삭제" />
+            <input type="button" class="swap-button" value="선택된 노드 바꾸기" />
+        </div>
+        <table border="1" class="notice-list">
+            <thead>
+            <tr>
+                <td><input class="overall-checkbox" type="checkbox"></td>
+                <td>번호</td>
+                <td>제목</td>
+                <td>작성일</td>
+                <td>작성자</td>
+                <td>조회수</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>1</td>
+                <td><a href="1">자바스크립트란..</a></td>
+                <td>2020-03-10</td>
+                <td>kang</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>2</td>
+                <td><a href="1">유투브란..</a></td>
+                <td>2020-03-11</td>
+                <td>kkang</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>3</td>
+                <td><a href="3">기본기가 튼튼해야..</a></td>
+                <td>2020-03-12</td>
+                <td>kji</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>4</td>
+                <td><a href="4">조회수는..</a></td>
+                <td>2020-03-13</td>
+                <td>ji</td>
+                <td>0</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    <hr />
+
+<section id="section9">
+        <h1> ex9) 노드 삽입 & 노드 바꾸기 </h1>
+        <div>
+            <input type="button" class="up-button" value="위로" />
+            <input type="button" class="down-button" value="아래로" />
+        </div>
+        <table border="1" class="notice-list">
+            <thead>
+            <tr>
+                <td>번호</td>
+                <td>제목</td>
+                <td>작성일</td>
+                <td>작성자</td>
+                <td>조회수</td>
+            </tr>
+            </thead>
+            <tbody>
+                <tr style="background: lightblue;">
+                    <td>1</td>
+                    <td><a href="1">자바스크립트란..</a></td>
+                    <td>2020-03-10</td>
+                    <td>kang</td>
+                    <td>2</td>
+                </tr>
+                <td>2</td>
+                <td><a href="1">유투브란..</a></td>
+                <td>2020-03-11</td>
+                <td>kkang</td>
+                <td>1</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><a href="3">기본기가 튼튼해야..</a></td>
+                    <td>2020-03-12</td>
+                    <td>kji</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><a href="4">조회수는..</a></td>
+                    <td>2020-03-13</td>
+                    <td>ji</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <hr />
+
+    <section id="section8">
+        <h1> ex8) 노드 복제와 template tag </h1>
+        <div>
+            <input type ="button" class="clone-button" value="복제" />
+            <input type ="button" class="template-button" value="템플릿 복제" />
+        </div>
+        <!-- 2) 템플릿 사용   -->
+        <template>
+            <tr>
+                <td></td>
+                <td><a href="1"></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </template>
+
+        <table border="1" class="notice-list">
+            <thead>
+                <tr>
+                    <td>번호</td>
+                    <td>제목</td>
+                    <td>작성일</td>
+                    <td>작성자</td>
+                    <td>조회수</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </section>
+    <hr />
+
+    <section id="section7">
+        <h1> ex7) 동적으로 텍스트 노드 추가 & 삭제(ex6) + 엘리먼트 노드 2개 추가 & 삭제 </h1>
+        <div>
+            <input class="title-input" name="title" />
+            <input type="button" class="add-button" value="추가" />
+            <input type="button" class="del-button" value="삭제" />
+        </div>
+        <ul class="menu-list">
+            <li><a href="">aaa</a></li>
+            <li><a href="">bbb</a></li>
+        </ul>
+    </section>
+    <hr />
+
+    <section id="section6">
+        <h1> ex6) 동적으로 텍스트 노드 추가 & 삭제 </h1>
+        <div>
+            <input class="title-input" name="title" />
+            <input type="button" class="add-button" value="추가" />
+            <input type="button" class="del-button" value="삭제" />
+        </div>
+        <div class="menu-list">
+
+        </div>
+    </section>
+    <hr />
+
+    <section id="section5">
+        <h1> ex5) element 노드의 속성 변경하기(버튼 누르면 이미지가 뜨는) & css 속성 변경하기 </h1>
+        <div>
+            <!--   1) 주관식일 때  -->
+            <input class="src-input" list="img-list" />
+            <datalist id="img-list">
+                <option value="1.jpg">img1</option>
+                <option value="2.jpg">img2</option>
+                <option value="3.jpg">img3</option>
+            </datalist>
+
+            <!-- 2) 객관식일 때
+            <select class="img-select">
+                <option value="1.jpg">img1</option>
+                <option value="2.jpg">img2</option>
+                <option value="3.jpg">img3</option>
+            </select>
+            -->
+
+            <!--  css 추가 내용 : 이거 누르면 이미지 테두리 색바뀌는   -->
+            <input type="color" class="color-input" />
+
+            <input class="change-button" type="button" value="변경하기"/>
+        </div>
+        <div>
+            <img class="img" src="12_images/1.jpg" style="border: 1px solid red;" />
+        </div>
+    </section>
+    <hr />
+
+    <section id="section4">
+        <h1>ex4) childNodes & children 이용한 노드 선택 </h1>
+        <div class="box">
+            <input />
+            <input />
+        </div>
+    </section>
+    <hr />
+
+    <section id="section3">
+        <h1>ex3) selectors API Level1 </h1>
+        <div>
+            <input class="txt-x" type="text" value="0" dir="rtl" />
+            +
+            <input class="txt-y" type="text" value="0" dir="rtl" />
+            <input class="btn-add" type="button" value="=" />
+            <input class="txt-sum" type="text" value="0" readonly dir="rtl" />
+        </div>
+    </section>
+    <hr />
+
+    <section id="section2">
+        <h1>ex2) element 선택방법 개선하기 </h1>
+        <div>
+            <input class="txt-x" type="text" value="0" dir="rtl" />
+            +
+            <input class="txt-y" type="text" value="0" dir="rtl" />
+            <input class="btn-add" type="button" value="=" />
+            <input class="txt-sum" type="text" value="0" readonly dir="rtl" />
+        </div>
+    </section>
+    <hr />
+
+    <section>
+        <h1>ex1) 계산기 프로그램</h1>
+        <div>
+            <input id="txt-x" type="text" value="0" dir="rtl" />
+            +
+            <input id="txt-y" type="text" value="0" dir="rtl" />
+            <input id="btn-add" type="button" value="=" />
+            <input id="txt-sum" type="text" value="0" readonly dir="rtl" />
+        </div>
+    </section>
+    <hr />
+
+    </body>
+</html>

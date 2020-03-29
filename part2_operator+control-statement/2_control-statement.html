@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <script>
+            /*
+            var ar = ["hello", "hi", "hoho"];
+
+            for(var i =0; i<ar.length; i++)
+                document.write(ar[i] + "<br />");
+
+            */
+
+            // 자바스크립트에는 for-in 있다
+            // 위에것을 for-in 으로
+            var ar = ["hello", "hi", "hoho"];
+            var ob = {id:1, job:"학생", age: "23"};   // object객체에서도 똑같이 사용하려고 혼동 안주기 위해서 자바스크립트에서는 다른것이구나 생각
+
+            //데이터 출력이 아니라 인덱스 출력이 다른 점이구나!(데이터 순회가 아니라 키값 순회구나!)
+            for(var i in ar)
+                document.write(ar[i] + "<br />");
+
+            for(var i in ob)
+                document.write(ob[i] + "<br />");
+
+
+            // 데이터 출력이 아니라 0 1 2 출력된다(데이터 출력하려면 위처럼)
+            var ar = ["hello", "hi", "hoho"];
+
+            for(var d in ar)
+                document.write(d + "<br />");
+
+
+        </script>
+    </body>
+</html>
+
+

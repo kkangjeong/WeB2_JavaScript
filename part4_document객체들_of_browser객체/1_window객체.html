@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+    <script>
+        // 브라우저 객체에 window객체가 있다(window는 브라우저, document는 페이지(탭)이라고 생각하기)
+        // window.location(브라우저 탭 이용하는)  window.history(브라우저 뒤로가기/앞으로가기)
+        // window.document(가장 많이 차지하는 브라우저 내용들) ..
+
+        // 1)
+        var x = 3;
+        var y = 0;
+        window.alert(x+y);  //window 생략 가능해서 생략해왔던 것
+
+        // 2) 대화상자
+        var x, y;
+        x = prompt("x 값을 입력하세요", 0);
+        y = prompt("y 값을 입력하세요", 0);    //이것도 window. 생략
+        alert(x+y);
+
+        // 3, 4 이면 출력 34 된다.. prompt는 문자열만 입력이기 때문에
+
+        // 2-1) 그러면 숫자 더하기 하고 싶을 때
+        var x, y;
+        x = prompt("x 값을 입력하세요", 0);
+        y = prompt("y 값을 입력하세요", 0);
+
+        x = parseInt(x);
+        y = parseInt(y);
+
+        alert(x+y);
+
+
+        // +) parseInt
+        parseInt("abc");    //return NaN(not a number : 숫자 형태가 아니다 -> 에러 아니고 NaN이라고 리턴)
+        //
+
+        // 중요한 건 -> 슬라이싱 안해도 100px이면 100이니까 나중에 유용하게 쓰인다!
+        parseInt("12abc");  //return 12를 한다
+
+
+
+        // 3) confirm : yes/no 가능해서
+        var answer;
+        answer = confirm("정말로 삭제하시겠습니까?");
+        if(answer)
+            alert("삭제되었습니다.");
+
+
+
+
+
+    </script>
+</body>
+</html>
+
+
